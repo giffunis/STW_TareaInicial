@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<h1 id="tarea-inicial-de-la-asignatura-sistemas-y-tecnologías-web">Tarea inicial de la asignatura Sistemas y Tecnologías Web</h1>
+<h2 id="introducción">Introducción</h2>
+<p>Esta <a href="https://campusvirtual.ull.es/1516/mod/assign/view.php?id=62097">tarea</a> está descrita en el <a href="https://campusvirtual.ull.es/1516/course/view.php?id=187">Campus</a> de la asignatura.</p>
+<p>Para esta asignatura, y para poder trabajar más comodamente durante el curso, he clonado una máquina virtual de 64 bits con ubuntu, en VirtualBox. Se trata de una instalación limpia y que solamente utilizaremos para el uso de la asignatura.</p>
+<p>El registro en GitHub, Google+, y en Cloud9, no lo explicaré en este informe, debido a que ya lo habíamos realizado en la asignatura de Lenguajes y paradigmas de la Programación (asignatura que se imparte en el tercer curso del grado).</p>
+<p>El sistema operativo de mi ordenador anfitrión es Yosmite y el de la máquina virtual es el Ubuntu 14.04.3 LTS.</p>
+<h3 id="configuración-de-la-máquina-virtual">1. Configuración de la máquina virtual</h3>
+<p>Para una mayor funcionalidad, vamos configurar el acceso a la máquina virtual desde el ordenador anfitrión utilizando, una configuración NAT con reenvío de puertos de la siguiente manera:</p>
+<div class="figure">
+<img src="Images/Puertos_STW.png" alt="Configuración de puertos" />
+<p class="caption">Configuración de puertos</p>
+</div>
+<p>Seguidamente, comprobamos que el servidor SSH esté corriendo y escuchando el por el puerto 22.</p>
+<pre><code>$ netstat -tuna</code></pre>
+<div class="figure">
+<img src="Images/Puerto22.png" alt="Resultado" />
+<p class="caption">Resultado</p>
+</div>
+<p>En el caso contrario, bastaría con instalar el ssh server.</p>
+<p>En la máquina anfitriona, podermos, para facilitar el acceso a la máquina virtual, crear un fichero <em>&quot;config&quot;</em> y que configuraremos de la siguiente manera:</p>
+<pre><code>#Ubuntu_STW
+Host stw # Nombre con el que llamaremos a la máquina.
+Hostname localhost
+User jose # nombre de usuario.
+Port 2000 # Puerto por el que nos conectaremos.</code></pre>
+<p>Una vez configurado lo anterior, podremos acceder mediante la terminal a nuestra máquina virtual, de la siguiente manera</p>
+<pre><code>$ ssh stw</code></pre>
+<p>y... Listo!.</p>
+<div class="figure">
+<img src="Images/Acceso.png" alt="Acceso" />
+<p class="caption">Acceso</p>
+</div>
+<h3 id="configurar-una-carpeta-compartida">2. Configurar una carpeta compartida</h3>
+<p>Creamos una carpeta en el sistema anfitrion, la cual al ser compartida nos servirá para trabajar en los ficheros directamente desde cualquier sistema. Seguidamente accedemos a la configuración de virtualbox y lo dejamos así:</p>
+<div class="figure">
+<img src="Images/Carpeta1.png" alt="configuración de la carpeta compartida 1" />
+<p class="caption">configuración de la carpeta compartida 1</p>
+</div>
+<p>En el sistema virtual, creamos una carpeta(en nuestro caso, <em>&quot;stw&quot;</em>) y añadimos la siguiente línea en <em>$ /etc/fstab</em></p>
+<pre><code>Nombre_Carpeta_sist_Anf  ruta_donde_montar  vboxsf  uid=1000,gid=1000   0   0</code></pre>
+<p><em>Como nuestro sistema invitado es Ubuntu 14.04.3 LTS debemos introducir la siguiente línea, en </em>/$ etc/modules* , para hacer que el módulo vboxsf, se cargue al arrancar el sistema.</p>
+<pre><code>vboxsf</code></pre>
+<p>Reiniciamos y listo!.</p>
+<h3 id="instalación-de-git-y-configuración-con-github">3. Instalación de git y configuración con Github</h3>
+<p>Es tan fácil como:</p>
+<pre><code>$ sudo apt-get install git</code></pre>
+<p>Para la configuración de la máquina virtual con Github, es recomendable seguir las instrucciones de generación de llaves ssh, de la página oficial. Estas son las <a href="https://help.github.com/articles/generating-ssh-keys/">instrucciones</a>.</p>
+<h3 id="instalación-de-atom">4. Instalación de Atom</h3>
+<p>Para instalar Atom en cualquier sistema operativo, basta con descargarlo de su página <a href="https://atom.io/">oficial</a>.</p>
+<p>*En la máquina virtual lo hemos instalado mediante la terminal:</p>
+<pre><code>$ sudo add-apt-repository ppa:webupd8team/atom
+$ sudo apt-get update
+$ sudo apt-get install atom</code></pre>
+<h3 id="instalación-de-node.js-npm-y-express.">5. Instalación de Node.js, npm y express.</h3>
+<p>Instalación de Node.js mediante la consola:</p>
+<pre><code>$ sudo apt-get update
+$ sudo apt-get install nodejs</code></pre>
+<p>y para instalar Node.js package manager (npm):</p>
+<pre><code>$ sudo apt-get install npm</code></pre>
+<p>El siguiente paso es comprobar que funcione npm:</p>
+<div class="figure">
+<img src="Images/npm_version.png" alt="npm --version" />
+<p class="caption">npm --version</p>
+</div>
+<p>Para instalar express utilizamos npm:</p>
+<pre><code>$ npm install express --save</code></pre>
+<h3 id="instalación-de-pandoc-en-mac">6. Instalación de Pandoc en Mac</h3>
+<p>Nos dirigimos al siguiente <a href="https://github.com/jgm/pandoc/releases/tag/1.15.0.6">enlace</a>, y lo descargamos.</p>
+</body>
+</html>
