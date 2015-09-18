@@ -93,3 +93,7 @@ Para instalar express utilizamos npm:
 
 ### 6. Instalación de Pandoc en Mac
 Nos dirigimos al siguiente [enlace](https://github.com/jgm/pandoc/releases/tag/1.15.0.6), y lo descargamos.
+
+Pandoc, no tiene interfaz gráfica, para convertir un fichero markdown en html, basta con ejecutar el comando:
+
+	pandoc fichero.md -f markdown -t html -s -o fichero.html
